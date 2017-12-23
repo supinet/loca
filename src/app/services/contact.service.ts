@@ -8,22 +8,30 @@ export class ContactService {
   private nextId: number;
 
   constructor() {
-    this.contacts = [
-      new Contact(1, 'João', 'j@j.com'),
-      new Contact(2, 'Maria', 'm@m.com')
-    ];
+    let contacts = this.getContacts();
 
-    this.nextId = 3;
+    if (contacts.length == 0) {
+      this.nextId = 0;
+    } else {
+      let maxId = contacts[contacts.length - 1].id;
+      this.nextId = maxId + 1;
+    }
   }
 
   public addContact(nome: string, email: string): void {
     let contact = new Contact(this.nextId, nome, email);
-    this.contacts.push(contact);
+    let contacts = this.getContacts();
+    contacts.push(contact);
+
+    this.setLocalStorageContacts(contacts);
+
     this.nextId++;
   }
 
   public removeContact(id: number): void {
-    this.contacts = this.contacts.filter((contact) => contact.id !== id);
+    let contacts = this.getContacts();
+    contacts = contacts.filter((contact) => contact.id !== id);
+    this.setLocalStorageContacts(contacts);
   }
 
   public editContact(): void {
@@ -31,7 +39,12 @@ export class ContactService {
   }
 
   public getContacts(): Contact[] {
-    return this.contacts;
+    let localStorageItem = JSON.parse(localStorage.getItem('contacts'));
+    return localStorageItem == null ? [] : localStorageItem.contacts;
+  }
+
+  private setLocalStorageContacts(contacts: Contact[]): void {
+    localStorage.setItem('contacts', JSON.stringify({ contacts: contacts }));
   }
 
 }

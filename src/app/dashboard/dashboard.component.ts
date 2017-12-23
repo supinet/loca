@@ -18,7 +18,7 @@ export class DashboardComponent implements OnInit {
   constructor(private contactService: ContactService) {
     this.nome = '';
     this.email = '';
-    this.contact = new Contact(0, 'null', 'null');
+    // this.contact = new Contact(0, 'null', 'null');
   }
 
   ngOnInit() {
@@ -30,7 +30,7 @@ export class DashboardComponent implements OnInit {
     this.email = '';
   }
 
-  private removeContact(): void {
+  private removeContact(contact: Contact): void {
     console.log('contact => ', this.contact);
     this.contactService.removeContact(this.contact.id);
   }
