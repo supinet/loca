@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { ContactService } from './../services/contact.service';
+import { Contact } from './../classes/contact';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,9 +9,34 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  @Input()
+  private contact: Contact;
+
+  private nome: string;
+  private email: string;
+
+  constructor(private contactService: ContactService) {
+    this.nome = '';
+    this.email = '';
+    this.contact = new Contact(0, 'null', 'null');
+  }
 
   ngOnInit() {
+  }
+
+  private addContact(): void {
+    this.contactService.addContact(this.nome, this.email);
+    this.nome = '';
+    this.email = '';
+  }
+
+  private removeContact(): void {
+    console.log('contact => ', this.contact);
+    this.contactService.removeContact(this.contact.id);
+  }
+
+  private editContact(): void {
+
   }
 
 }
