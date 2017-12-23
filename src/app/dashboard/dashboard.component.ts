@@ -34,7 +34,8 @@ export class DashboardComponent implements OnInit {
   }
 
   private editContact(contact: Contact): void {
-
+    console.log("contact on component => ", contact);
+    this.contactService.editContact(contact);
   }
 
 }

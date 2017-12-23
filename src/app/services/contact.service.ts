@@ -34,8 +34,8 @@ export class ContactService {
     this.setLocalStorageContacts(contacts);
   }
 
-  public editContact(): void {
-
+  public editContact(contact: Contact): void {
+    console.log("contact on service => ", contact)
   }
 
   public getContacts(): Contact[] {
