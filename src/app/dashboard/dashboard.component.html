@@ -44,8 +44,8 @@
         <td>{{ contact.nome }}</td>
         <td>{{ contact.email }}</td>
         <td class="text-center">
-          <button type="button" class="btn btn-danger" (click)="removeContact(contact)">Excluir</button>
-          <button type="button" class="btn btn-primary" (click)="editContact()">Editar</button>
+          <button type="button" class="btn btn-danger" (click)="removeContact(contact.id)">Excluir</button>
+          <button type="button" class="btn btn-primary" (click)="editContact(contact)">Editar</button>
         </td>
       </tr>
     </tbody>
